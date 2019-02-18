@@ -14,7 +14,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.httpBasic();
+        http.formLogin();
+
+        //To disable cache control -- never do in production - uncomment when to test
+        //http.headers().cacheControl().disable();
+
 
         http.authorizeRequests()
                 .mvcMatchers("/rootone").hasAnyAuthority("ROLE_ADMIN")
