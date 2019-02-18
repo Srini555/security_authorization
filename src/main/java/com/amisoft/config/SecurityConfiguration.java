@@ -24,6 +24,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.requiresChannel().requestMatchers(r -> r.getHeader("x-forwarded-proto") != null).requiresInsecure();
 
+        http.headers().contentSecurityPolicy("default-src 'self' ");
+
 
         http.authorizeRequests()
                 .mvcMatchers("/rootone").hasAnyAuthority("ROLE_ADMIN")
