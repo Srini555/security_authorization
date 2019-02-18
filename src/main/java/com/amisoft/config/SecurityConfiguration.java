@@ -20,6 +20,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //http.headers().cacheControl().disable();
 
 
+        //Https redirect
+
+        http.requiresChannel().requestMatchers(r -> r.getHeader("x-forwarded-proto") != null).requiresInsecure();
+
+
         http.authorizeRequests()
                 .mvcMatchers("/rootone").hasAnyAuthority("ROLE_ADMIN")
                 .mvcMatchers(HttpMethod.GET,"/roottwo").hasAnyAuthority("ROLE_ADMIN")
